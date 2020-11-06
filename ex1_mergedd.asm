@@ -1,7 +1,7 @@
-.global _start
+.global main
 
 .section .text
-_start:
+main:
   # %ebx - loop counter
   # %edx - division remainder
   # %rax - num holder
@@ -31,3 +31,22 @@ INC:
 
 END:
   movl %ecx, countBits
+  
+ 
+  cmpl $0x202, (num)
+  jne bad_exit
+  cmpl $2, (countBits)
+  jne bad_exit
+
+  movq $60, %rax
+  movq $0, %rdi
+  syscall
+
+bad_exit:
+  movq $60, %rax
+  movq $1, %rdi
+  syscall
+
+.section .data
+num: .quad 0x
+countBits:  .zero 4

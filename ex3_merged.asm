@@ -1,9 +1,8 @@
-.global _start
-
-.section .text
-_start:
-  #Write your code here
-  # %ebx - array iterator
+.text
+.global main
+main:
+    # write your code here
+    # %ebx - array iterator
     # %eax - sum of values
     # %eax - division result (avg)
     # %r8d - stores array iteration length (len-1)
@@ -25,3 +24,22 @@ DIVIDE:
     xor %edx, %edx
     div %r8d
     mov %rax, avg
+
+
+
+  cmpl $8, (avg)
+  jne bad_exit
+
+  movq $60, %rax
+  movq $0, %rdi
+  syscall
+
+bad_exit:
+  movq $60, %rax
+  movq $1, %rdi
+  syscall
+
+.section .data
+arr: .int 6,12,9,8
+len: .short 4
+avg: .zero 4

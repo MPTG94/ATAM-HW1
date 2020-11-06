@@ -24,5 +24,4 @@ else
 	STATUS=1	
 fi
 
-rm merged.*
 exit ${STATUS}
