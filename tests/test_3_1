@@ -1,0 +1,17 @@
+
+  cmpl $8, (avg)
+  jne bad_exit
+
+  movq $60, %rax
+  movq $0, %rdi
+  syscall
+
+bad_exit:
+  movq $60, %rax
+  movq $1, %rdi
+  syscall
+
+.section .data
+arr: .int 6,12,9,8
+len: .short 4
+avg: .zero 4
