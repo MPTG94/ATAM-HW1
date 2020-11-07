@@ -1,9 +1,8 @@
-.global _start
-
-.section .text
-_start:
-  # Write your code here
-  # r9 - stores the number of replacements made in this iteration
+.text
+.global main
+main:
+    # write your code here
+    # r9 - stores the number of replacements made in this iteration
     movq (head), %rax
     cmpq $0, %rax
     # empty list
@@ -83,3 +82,56 @@ CHECK_SWAP_2:
     jmp CONTINUE
     
 EXIT:
+
+  movq (head), %rbx
+  cmpl $0, (%rbx)
+  jne bad_exit
+  cmpl $3, 4(%rbx)
+  jne bad_exit
+  
+  movq 8(%rbx), %rbx
+  cmpl $1, (%rbx)
+  jne bad_exit
+  cmpl $22, 4(%rbx)
+  jne bad_exit
+
+  movq 8(%rbx), %rbx
+  cmpl $2, (%rbx)
+  jne bad_exit
+  cmpl $15, 4(%rbx)
+  jne bad_exit
+
+  movq 8(%rbx), %rbx
+  cmpl $5, (%rbx)
+  jne bad_exit
+  cmpl $6, 4(%rbx)
+  jne bad_exit
+
+  movq $60, %rax
+  movq $0, %rdi
+  syscall
+
+bad_exit:
+  movq $60, %rax
+  movq $1, %rdi
+  syscall
+
+.section .data
+head:
+        .quad   A
+A:
+        .int    1
+        .int    22
+        .quad   B
+B:
+        .int    5
+        .int    6
+        .quad   C
+C:
+        .int    2
+        .int    15
+        .quad   D
+D:
+        .int    0
+        .int    3
+        .quad   0
