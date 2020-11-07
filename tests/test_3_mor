@@ -1,5 +1,5 @@
 
-  cmpl $0, (avg)
+  cmpl $9, (avg)
   jne bad_exit
 
   movq $60, %rax
@@ -12,6 +12,6 @@ bad_exit:
   syscall
 
 .section .data
-arr: .int 0,1,1,0
+arr: .int 9,9,9,9
 len: .short 4
 avg: .zero 4
