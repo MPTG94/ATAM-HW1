@@ -1,11 +1,6 @@
 
+
   movq (head), %rbx
-  cmpl $-1, (%rbx)
-  jne bad_exit
-  cmpl $13, 4(%rbx)
-  jne bad_exit
-  
-  movq 8(%rbx), %rbx
   cmpl $0, (%rbx)
   jne bad_exit
   cmpl $3, 4(%rbx)
@@ -45,6 +40,12 @@
   cmpl $6, (%rbx)
   jne bad_exit
   cmpl $20, 4(%rbx)
+  jne bad_exit
+
+  movq 8(%rbx), %rbx      
+  cmpl $7, (%rbx)
+  jne bad_exit
+  cmpl $26, 4(%rbx)
   jne bad_exit
 
   movq 8(%rbx), %rbx
@@ -102,6 +103,6 @@ H:
         .int 20
         .quad I
 I:
-        .int -1
-        .int 13
+        .int 7
+        .int 26
         .quad 0
