@@ -1,0 +1,17 @@
+
+  movq (head), %rbx
+  cmp $0, %rbx
+  jne bad_exit
+
+  movq $60, %rax
+  movq $0, %rdi
+  syscall
+
+bad_exit:
+  movq $60, %rax
+  movq $1, %rdi
+  syscall
+
+.section .data
+head:
+        .quad   0

@@ -1,0 +1,107 @@
+
+  movq (head), %rbx
+  cmpl $-1, (%rbx)
+  jne bad_exit
+  cmpl $13, 4(%rbx)
+  jne bad_exit
+  
+  movq 8(%rbx), %rbx
+  cmpl $0, (%rbx)
+  jne bad_exit
+  cmpl $3, 4(%rbx)
+  jne bad_exit
+
+  movq 8(%rbx), %rbx
+  cmpl $1, (%rbx)
+  jne bad_exit
+  cmpl $22, 4(%rbx)
+  jne bad_exit
+
+  movq 8(%rbx), %rbx
+  cmpl $2, (%rbx)
+  jne bad_exit
+  cmpl $15, 4(%rbx)
+  jne bad_exit
+
+  movq 8(%rbx), %rbx
+  cmpl $3, (%rbx)
+  jne bad_exit
+  cmpl $70, 4(%rbx)
+  jne bad_exit
+
+  movq 8(%rbx), %rbx
+  cmpl $4, (%rbx)
+  jne bad_exit
+  cmpl $17, 4(%rbx)
+  jne bad_exit
+
+  movq 8(%rbx), %rbx
+  cmpl $5, (%rbx)
+  jne bad_exit
+  cmpl $6, 4(%rbx)
+  jne bad_exit
+
+  movq 8(%rbx), %rbx
+  cmpl $6, (%rbx)
+  jne bad_exit
+  cmpl $20, 4(%rbx)
+  jne bad_exit
+
+  movq 8(%rbx), %rbx
+  cmpl $8, (%rbx)
+  jne bad_exit
+  cmpl $4, 4(%rbx)
+  jne bad_exit
+
+  movq 8(%rbx), %rbx
+  cmp $0, %rbx
+  jne bad_exit
+
+  movq $60, %rax
+  movq $0, %rdi
+  syscall
+
+bad_exit:
+  movq $60, %rax
+  movq $1, %rdi
+  syscall
+
+.section .data
+head:
+        .quad   A
+A:
+        .int    5
+        .int    6
+        .quad   B
+B:
+        .int    2
+        .int    15
+        .quad   C
+C:
+        .int    1
+        .int    22
+        .quad   D
+D:
+        .int    0
+        .int    3
+        .quad   E
+E:
+        .int 3
+        .int 70
+        .quad F
+F:
+        .int 8
+        .int 4
+        .quad G
+G:
+        .int 4
+        .int 17
+        .quad H
+H:
+        .int 6
+        .int 20
+        .quad I
+I:
+        .int -1
+        .int 13
+        .quad 0
