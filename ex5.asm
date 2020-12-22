@@ -31,7 +31,7 @@ CHECK_IDS:
     movl (%rax), %ecx
     movl (%rbx), %edx
     cmpl %ecx, %edx
-    jl SWAP
+    jb SWAP
     
 ITERATOR_LOOP:
     movq 8(%rbx), %rbx

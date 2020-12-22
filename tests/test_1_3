@@ -1,0 +1,19 @@
+
+  movq $0xffffffffffffffff, %r10
+  cmpq %r10, (num)
+  jne bad_exit
+  cmpl $64, (countBits)
+  jne bad_exit
+
+  movq $60, %rax
+  movq $0, %rdi
+  syscall
+
+bad_exit:
+  movq $60, %rax
+  movq $1, %rdi
+  syscall
+
+.section .data
+num: .quad 0xffffffffffffffff
+countBits:  .zero 4

@@ -1,0 +1,18 @@
+
+  movq $0x2468ACF13579BDE0, %rcx
+  cmpq %rcx, (c)
+  jne bad_exit
+
+  movq $60, %rax
+  movq $0, %rdi
+  syscall
+
+bad_exit:
+  movq $60, %rax
+  movq $1, %rdi
+  syscall
+
+.section .data
+a: .quad 0x123456789ABCDEF0
+b: .quad 0x2468ACF13579BDE0
+c: .zero 8

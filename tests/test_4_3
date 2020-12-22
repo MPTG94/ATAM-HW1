@@ -1,0 +1,65 @@
+
+  cmpq $A, (root)
+  jne bad_exit
+
+  movq $A, %rbx
+  cmpq $1, (%rbx)
+  jne bad_exit
+  cmpq $new_node, 8(%rbx)
+  jne bad_exit
+  cmpq $B, 16(%rbx)
+  jne bad_exit
+
+  movq $B, %rbx
+  cmpq $2, (%rbx)
+  jne bad_exit
+  cmpq $0, 8(%rbx)
+  jne bad_exit
+  cmpq $C, 16(%rbx)
+  jne bad_exit
+
+  movq $C, %rbx
+  cmpq $3, (%rbx)
+  jne bad_exit
+  cmpq $0, 8(%rbx)
+  jne bad_exit
+  cmpq $0, 16(%rbx)
+  jne bad_exit
+
+  movq $new_node, %rbx
+  cmpq $-1, (%rbx)
+  jne bad_exit
+  cmpq $0, 8(%rbx)
+  jne bad_exit
+  cmpq $0, 16(%rbx)
+  jne bad_exit
+
+  movq $60, %rax
+  movq $0, %rdi
+  syscall
+
+bad_exit:
+  movq $60, %rax
+  movq $1, %rdi
+  syscall
+
+.section .data
+root:
+        .quad   A
+A:
+        .quad   1
+        .quad   0
+        .quad   B
+B:
+        .quad   2
+        .quad   0
+        .quad   C
+C:
+        .quad   3
+        .quad   0
+        .quad   0
+
+new_node:
+        .quad   -1
+        .quad   0
+        .quad   0
